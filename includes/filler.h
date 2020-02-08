@@ -20,6 +20,7 @@ typedef struct		s_map
 
 	int				best_summ;
 	int				best_x;
+	int				best_y;
 	char			*my_abc;
 	char			*opp_abc;
 
@@ -62,5 +63,7 @@ typedef struct		s_piece
 	// int				start_y;
 	// int				end_y;
 }					t_piece;
+
+void		get_vm_return(t_map *map, t_piece *p);
 
 #endif

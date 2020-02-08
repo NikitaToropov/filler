@@ -6,7 +6,7 @@ void			get_player(t_map *map)
 
 	line = NULL;
 	get_next_line(0, &line);
-	if (ft_strncmp(line, "$$$", 3) == 0 && map->player == 0)
+	if (ft_strncmp(line, "$$$", 2) == 0 && map->player == 0)
 	{
 		if (ft_strstr(line, "p2"))
 		{
@@ -43,16 +43,13 @@ int				main(void)
 {
 	t_map		map;
 	t_piece		p;
-	// char		p1_abc;
-	// char		p2_abc;
 
-	// p1_abc = "oO";
-	// p2_abc = "xX";
 	init_struct(&map, &p);
+	// get_player(&map, P1_ABC, P2_ABC);
 	get_player(&map);
 	while (1)
 	{
-		get_the_ret(map, p);
+		get_vm_return(&map, &p);
 		if (play(map, p) == 1)
 		{
 			if (last_try(map, p) == 1)
@@ -62,8 +59,6 @@ int				main(void)
 			}
 		}
 	}
-	free(p->piece);
-	free(map);
-	free(p);
+	free(p.piece);
 	return (0);
 }
