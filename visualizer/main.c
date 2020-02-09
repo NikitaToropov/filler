@@ -7,7 +7,8 @@
 # define RED			"\033[1;31m"
 # define PINK			"\033[1;39m"
 # define BLUE			"\033[1;35m"
-# define ANOTHER		"\033[34m"
+# define ANOTHER			"\033[1;39m"
+// # define ANOTHER		"\033[34m"
 
 void		print_color_char(char c, char *color)
 {
@@ -32,8 +33,10 @@ int			main(void)
 			write(1, "\n", 1);
 			free(line);
 			i = 0;
-			while (get_next_line(0, &line) && ft_isdigit(line[0]) &&
-			ft_isdigit(line[1]) && ft_isdigit(line[2]) && line[3] == ' ')
+			// while (get_next_line(0, &line) && ft_isdigit(line[0]) &&
+			// ft_isdigit(line[1]) && ft_isdigit(line[2]) && line[3] == ' ')
+			while (get_next_line(0, &line) && line[3] == ' ' &&
+			ft_atoi(line) == i)
 			{
 				j = 0;
 				while (line[j])
@@ -55,17 +58,17 @@ int			main(void)
 				i++;
 			}
 		}
-		// if (get_next_line(0, line) && ft_strncmp(line, "== O fin:", 8))
-		// {
-		// 	write(1, line, ft_strlen(line));
-		// 	write(1, "\n", 1);
-		// 	free(line);
-		// 	get_next_line(0, line);
-		// 	write(1, line, ft_strlen(line));
-		// 	write(1, "\n", 1);
-			
-		// }
-		usleep(100000);
+		usleep(10000);
+		if (!ft_strncmp(line, "== O fin:", 8))
+		{
+			write(1, "\n",1);
+			write(1, line, ft_strlen(line));
+			write(1, "\n",1);
+			free(line);
+			get_next_line(0, &line);
+			write(1, line, ft_strlen(line));
+			write(1, "\n",1);
+		}
 		free(line);
 	}
 	return (0);
