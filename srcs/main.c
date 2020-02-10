@@ -1,7 +1,7 @@
 #include "filler.h"
 
 
-ft_error(t_map *map, t_piece *p, char *line)
+void		ft_error(t_map *map, t_piece *p, char *line)
 {
 	free_piece(p);
 	free_map(map);

@@ -1,5 +1,4 @@
 #include "filler.h"
-			fill_map(map);
 
 int			fill_map_size(char *line, t_map *map)
 {
@@ -8,8 +7,7 @@ int			fill_map_size(char *line, t_map *map)
 	int		y;
 	int		x;
 
-	if (!(y_s = ft_strchar(line, ' ')) || (x_s = ft_strchar(y_s + 1, ' ' ||
-	ft_all_isdigit(x_s + 1))) ||
+	if (!(y_s = ft_strchar(line, ' ')) || (x_s = ft_strchar(y_s + 1, ' ')) ||
 	(x = ft_atoi(x_s)) <= 0 || !(y = ft_atoi(y_s) <= 0))
 		return (0);
 	if (map->size_y > 0 && map->size_x > 0 &&
@@ -23,6 +21,21 @@ int			fill_map_size(char *line, t_map *map)
 	}
 }
 
+int			fill_piece_size(char *line, t_piece *p)
+{
+	char	*y_s;
+	char	*x_s;
+	int		y;
+	int		x;
+
+	if (!(y_s = ft_strchar(line, ' ')) || (x_s = ft_strchar(y_s + 1, ' ')) ||
+	(x = ft_atoi(x_s)) <= 0 || !(y = ft_atoi(y_s) <= 0))
+		return (0);
+	p->size_y = y;
+	p->size_x = x;
+	return (1);
+}
+
 void		get_vm_return(t_map *map, t_piece *p)
 {
 	char		*line;
@@ -34,14 +47,16 @@ void		get_vm_return(t_map *map, t_piece *p)
 			if (!fill_map_size(line, map))
 				ft_error(map, p, line);
 			free(line);
-			fill_map(map);
+			fill_map(map, p);
 		}
 		else if (ft_strncmp(line, "Piece", 4) == 0)
 		{
-			get_piece_size(line, p);
-			return (1);
+			if (fill_piece_size(line, p))
+				ft_error(map, p, line);
+			free(line);
+			fill_piece(map, p);
 		}
 		else
-			ft_strdel(&line);
+			free(line);
 	}
 }

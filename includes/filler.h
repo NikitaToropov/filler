@@ -64,8 +64,25 @@ typedef struct		s_piece
 	// int				end_y;
 }					t_piece;
 
+void		ft_error(t_map *map, t_piece *p, char *line);
+
+/*
+* MAP MANIPULATIONS
+*/
+void		fill_map(t_map *map, t_piece *p);
+void		init_t_map(t_map *map);
 void		free_map(t_map *map);
+
+/*
+* PIECE MANIPULATIONS
+*/
+void		fill_piece(t_map *map, t_piece *p);
+void		init_t_piece(t_piece *p);
 void		free_piece(t_piece *p);
+
+/*
+* PARSING
+*/
 void		get_vm_return(t_map *map, t_piece *p);
 
 #endif
