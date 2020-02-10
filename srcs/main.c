@@ -1,6 +1,16 @@
 #include "filler.h"
 
-void			get_player(t_map *map)
+
+ft_error(t_map *map, t_piece *p, char *line)
+{
+	free_piece(p);
+	free_map(map);
+	if (line)
+		free(line);
+	exit(1);
+}
+
+void			get_player(t_map *map, char *p1_abc, char *p2_abc)
 {
 	char		*line;
 
@@ -11,14 +21,14 @@ void			get_player(t_map *map)
 		if (ft_strstr(line, "p2"))
 		{
 			map->player = 2;
-			map->my_abc = P2_ABC;
-			map->opp_abc = P1_ABC;
+			map->my_abc = p2_abc;
+			map->en_abc = p1_abc;
 		}
- 		if (ft_strstr(line, "p1"))
+		if (ft_strstr(line, "p1"))
 		{
 			map->player = 1;
-			map->my_abc = P1_ABC;
-			map->opp_abc = P2_ABC;
+			map->my_abc = p1_abc;
+			map->en_abc = p2_abc;
 		}
 	}
 	free(line);
@@ -45,11 +55,19 @@ int				main(void)
 	t_piece		p;
 
 	init_struct(&map, &p);
-	// get_player(&map, P1_ABC, P2_ABC);
-	get_player(&map);
+	get_player(&map, P1_ABC, P2_ABC);
 	while (1)
 	{
 		get_vm_return(&map, &p);
+
+
+
+
+
+
+
+
+
 		if (play(map, p) == 1)
 		{
 			if (last_try(map, p) == 1)

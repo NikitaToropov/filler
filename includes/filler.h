@@ -22,7 +22,7 @@ typedef struct		s_map
 	int				best_x;
 	int				best_y;
 	char			*my_abc;
-	char			*opp_abc;
+	char			*en_abc;
 
 	// int				map_size_x;
 	// int				map_size_y;
@@ -64,6 +64,8 @@ typedef struct		s_piece
 	// int				end_y;
 }					t_piece;
 
+void		free_map(t_map *map);
+void		free_piece(t_piece *p);
 void		get_vm_return(t_map *map, t_piece *p);
 
 #endif

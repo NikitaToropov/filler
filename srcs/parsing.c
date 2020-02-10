@@ -1,29 +1,26 @@
 #include "filler.h"
+			fill_map(map);
 
-void			get_map_size(char *line, t_map *map)
+int			fill_map_size(char *line, t_map *map)
 {
-	int			i;
-	int			tmp;
+	char	*y_s;
+	char	*x_s;
+	int		y;
+	int		x;
 
-	i = 0;
-	if ()
-	while (line[i])
+	if (!(y_s = ft_strchar(line, ' ')) || (x_s = ft_strchar(y_s + 1, ' ' ||
+	ft_all_isdigit(x_s + 1))) ||
+	(x = ft_atoi(x_s)) <= 0 || !(y = ft_atoi(y_s) <= 0))
+		return (0);
+	if (map->size_y > 0 && map->size_x > 0 &&
+	(y != map->size_y || x != map->size_x))
+		return (0);
+	else
 	{
-		tmp = 0;
-		while (is_number(line[i]) == 0 && line[i])
-		{
-			tmp += line[i] - 48;
-			if (is_number(line[i + 1]) == 0)
-				tmp *= 10;
-			i++;
-		}
-		if (map->map_size_y == 0)
-			map->map_size_y = tmp;
-		else if (map->map_size_x == 0)
-			map->map_size_x = tmp;
-		i++;
+		map->size_y = y;
+		map->size_x = x;
+		return (1);
 	}
-	get_map(map);
 }
 
 void		get_vm_return(t_map *map, t_piece *p)
@@ -34,13 +31,10 @@ void		get_vm_return(t_map *map, t_piece *p)
 	{
 		if (ft_strncmp(line, "Plateau", 6) == 0)
 		{
-			fill_map_size(line, map);
-
-
-
-
-
+			if (!fill_map_size(line, map))
+				ft_error(map, p, line);
 			free(line);
+			fill_map(map);
 		}
 		else if (ft_strncmp(line, "Piece", 4) == 0)
 		{

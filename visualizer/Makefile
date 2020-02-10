@@ -11,7 +11,7 @@ DIR_S = srcs
 DIR_O = objs
 
 # files
-C_FILES = 
+		
 
 SRCS = $(addprefix $(DIR_S)/,$(C_FILES))
 OBJS = $(addprefix $(DIR_O)/,$(C_FILES:.c=.o))
