@@ -6,7 +6,7 @@ void		set_default_heat(t_map *map)
 	int		i;
 
 	i = 0;
-	while (i < map->size_y)
+	while (i < map->m_size_y)
 	{
 		line = map->map[i];
 		while(*line)
@@ -57,10 +57,10 @@ int			set_the_heat(t_map *map, char h)
 	y = 0;
 	marker = 0;
 	prev = h - 1;
-	while (y < map->size_y)
+	while (y < map->m_size_y)
 	{
 		x = 0;
-		while (x < map->size_x)
+		while (x < map->m_size_x)
 		{
 			if (map->map[y][x] == prev)
 				if (check_and_set_aroud(map->map, y, x, h))

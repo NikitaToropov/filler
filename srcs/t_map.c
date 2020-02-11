@@ -1,5 +1,27 @@
 #include "filler.h"
 
+void		print_map(t_map *map)
+{
+	int		y;
+	char	*line;
+
+	y = 0;
+	while (y < map->size_y)
+	{
+		line = map->map[y];
+		while (*line)
+		{
+			if (*line == MY_HEAT)
+				printf("%s%4i%s", RED, (int)*line, RESET);
+			else
+				printf("%4i", (int)*line);
+			line++;
+		}
+		printf("\n");
+	}
+	printf("\n");
+}
+
 void		fill_map(t_map *map, t_piece *p)
 {
 	char	*line;
