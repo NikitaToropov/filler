@@ -7,8 +7,10 @@
 # include "libft.h"
 
 # define INF		1000000000
-# define P1_ABC		"oO"
-# define P2_ABC		"xX"
+# define MY_HEAT	127
+# define DEFAULT	126
+# define P1			'O'
+# define P2			'X'
 # define X_CONST	4
 
 typedef struct		s_map
@@ -21,8 +23,8 @@ typedef struct		s_map
 	int				best_summ;
 	int				best_x;
 	int				best_y;
-	char			*my_abc;
-	char			*en_abc;
+	char			me;
+	char			enemy;
 
 	// int				map_size_x;
 	// int				map_size_y;

@@ -59,16 +59,13 @@ int				main(void)
 	while (1)
 	{
 		get_vm_return(&map, &p);
-
-
-
-
-
-
-
-
-
+		make_heat_map(map);
 		if (play(map, p) == 1)
+
+
+
+
+
 		{
 			if (last_try(map, p) == 1)
 			{
