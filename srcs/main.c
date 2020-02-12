@@ -1,61 +1,73 @@
 #include "filler.h"
 
-
-void		ft_error(t_map *map, t_piece *p, char *line)
+void		error(t_flr *step)
 {
-	free_piece(p);
-	free_map(map);
-	if (line)
-		free(line);
+	int		i;
+
+	free_t_flr(step);
+	write(1, "Error\n", 6);
 	exit(1);
 }
 
-void			get_player(t_map *map, char *p1_abc, char *p2_abc)
+void			get_player(t_flr *step)
 {
 	char		*line;
 
 	line = NULL;
-	get_next_line(0, &line);
-	if (ft_strncmp(line, "$$$", 2) == 0 && map->player == 0)
+	if (get_next_line(0, &line) < 0)
+	{
+		if (line)
+			free(line);
+		error(step);
+	}
+	if (ft_strncmp(line, "$$$ exec p", 9) == 0 && step->me == 0)
 	{
 		if (ft_strstr(line, "p2"))
 		{
-			map->player = 2;
-			map->my_abc = p2_abc;
-			map->en_abc = p1_abc;
+			step->me = P2_CHAR;
+			step->enemy = P1_CHAR;
 		}
 		if (ft_strstr(line, "p1"))
 		{
-			map->player = 1;
-			map->my_abc = p1_abc;
-			map->en_abc = p2_abc;
+			step->me = P2_CHAR;
+			step->enemy = P2_CHAR;
 		}
+	}
+	else
+	{
+		if (line)
+			free(line);
+		error(step);
 	}
 	free(line);
 }
 
-void		init_struct(t_map *map, t_piece *p)
+static void		init_t_flr(t_flr *step)
 {
-	map->map = NULL;
-	map->player = 0;
-	map->size_x = 0;
-	map->size_y = 0;
-	map->best_summ = INF;
-	map->best_x = -1;
-	map->best_y = -1;
+	step->map = NULL;
+	step->m_size_x = 0;
+	step->m_size_y = 0;
+	step->me = 0;
+	step->enemy = 0;
 
-	p->piece = NULL;
-	p->size_x = 0;
-	p->size_y = 0;
+	step->piece = NULL;
+	step->p_size_x = 0;
+	step->p_size_y = 0;
+
+	step->best_summ = INF;
+	step->best_x = -1;
+	step->best_y = -1;
 }
 
 int				main(void)
 {
-	t_map		map;
-	t_piece		p;
+	t_flr		step;
 
-	init_struct(&map, &p);
-	get_player(&map, P1_ABC, P2_ABC);
+	init_t_flr(&step);
+	get_player(&step);
+
+
+
 	while (1)
 	{
 		get_vm_return(&map, &p);

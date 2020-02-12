@@ -61,10 +61,8 @@ int			set_the_heat(t_map *map, char h)
 	{
 		x = 0;
 		while (x < map->m_size_x)
-		{
 			if (map->map[y][x] == prev)
-				if (check_and_set_aroud(map->map, y, x, h))
-					marker = 1;
+				marker = check_and_set_aroud(map->map, y, x, h);
 			x++;
 		}
 		y++;

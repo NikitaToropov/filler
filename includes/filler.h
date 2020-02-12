@@ -12,16 +12,15 @@
 # define INF		1000000000
 # define MY_HEAT	127
 # define DEFAULT	126
-# define P1			'O'
-# define P2			'X'
+# define P1_CHAR	'O'
+# define P2_CHAR	'X'
 # define X_CONST	4
 
-typedef struct		s_map
+typedef struct		s_flr
 {
 	char			**map;
 	int				m_size_x;
 	int				m_size_y;
-	char			player;
 	char			me;
 	char			enemy;
 
@@ -32,9 +31,11 @@ typedef struct		s_map
 	int				best_summ;
 	int				best_x;
 	int				best_y;
-}					t_map;
+}					t_flr;
 
-void		ft_error(t_map *map, t_piece *p, char *line);
+
+void		error(t_flr *step);
+
 
 /*
 * SET HEAT
