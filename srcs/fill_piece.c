@@ -23,6 +23,7 @@ printf("fill_piece_size/ Piece line\n");
 
 	step->p_size_y = y;
 	step->p_size_x = x;
+	// printf("%s\n", line);
 	if (step->p_size_y > step->m_size_y || step->p_size_x > step->m_size_x)
 	{
 printf("fill_piece_size/ piece bigger then map\n");
@@ -37,21 +38,24 @@ static void		check_piece_line(t_flr *step, char *line)
 	int			i;
 
 	i = 0;
-	
 	if (line && ft_strlen(line) == (size_t)step->p_size_x)
 	{
 		while (line[i])
 		{
 			if (!ft_strchr(".*", line[i]))
 			{
-printf("check_piece_line | proble %s\n", &line[i]);
+// printf("check_piece_line | proble %s\n", &line[i]);
 				error(step, line);
 			}
+
 			i++;
 		}
 	}
-printf("check_piece_line | to much problems\n");
-	error(step, line);
+	else
+	{
+	printf("check_piece_line | to much problems\n");
+		error(step, line);
+	}
 }
 
 void			fill_piece(t_flr *step)
@@ -60,6 +64,9 @@ void			fill_piece(t_flr *step)
 	int		i;
 
 	fill_piece_size(step);
+	if (!step->piece)
+		if (!(step->piece = ft_memalloc(sizeof(char*) * step->p_size_y)))
+			error(step, NULL);
 	i = 0;
 	line = NULL;
 	while (i < step->p_size_y && get_next_line(0, &line))
@@ -68,6 +75,7 @@ void			fill_piece(t_flr *step)
 		step->piece[i] = line;
 		i++;
 	}
+
 	if (i != step->p_size_y)
 	{
 printf("fill_piece/ i != step->p_size_y\n");

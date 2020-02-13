@@ -35,7 +35,7 @@ static void		get_player(t_flr *step)
 		}
 		if (ft_strstr(line, "p1"))
 		{
-			step->me = P2_CHAR;
+			step->me = P1_CHAR;
 			step->enemy = P2_CHAR;
 		}
 		free(line);

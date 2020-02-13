@@ -18,6 +18,7 @@ void		print_map(t_flr *step)
 			line++;
 		}
 		printf("\n");
+		y++;
 	}
 	printf("\n");
 }

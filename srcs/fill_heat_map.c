@@ -14,7 +14,7 @@ static void		set_default_heat(t_flr *step)
 			if (*line == step->me)
 				*line = MY_HEAT;
 			else if (*line == step->enemy)
-				*line = 0;
+				*line = 1;
 			else
 				*line = DEFAULT;
 			line++;
@@ -23,26 +23,36 @@ static void		set_default_heat(t_flr *step)
 	}
 }
 
-static int		set_heat_aroud(char **map, int y, int x, char h)
+static int		set_heat_aroud(t_flr *step, int y, int x, char h)
 {
 	int		i;
+	char	**map;
 
 	i = 0;
-	if (map[y + 1][x - 1] != MY_HEAT && map[y + 1][x - 1] > h && (i = 1))
+	map = step->map;
+	if ((y + 1) < step->m_size_y && (x - 1) >= 0 &&
+	map[y + 1][x - 1] != MY_HEAT && map[y + 1][x - 1] > h && (i = 1))
 		map[y + 1][x - 1] = h;
-	if (map[y + 1][x] != MY_HEAT && map[y + 1][x] > h && (i = 1))
+	if ((y + 1) < step->m_size_y &&
+	map[y + 1][x] != MY_HEAT && map[y + 1][x] > h && (i = 1))
 		map[y + 1][x] = h;
-	if (map[y + 1][x + 1] != MY_HEAT && map[y + 1][x + 1] > h && (i = 1))
+	if ((y + 1) < step->m_size_y && (x + 1) < step->m_size_x &&
+	map[y + 1][x + 1] != MY_HEAT && map[y + 1][x + 1] > h && (i = 1))
 		map[y + 1][x + 1] = h;
-	if (map[y][x - 1] != MY_HEAT && map[y][x - 1] > h && (i = 1))
+	if ((x - 1) >= 0 &&
+	map[y][x - 1] != MY_HEAT && map[y][x - 1] > h && (i = 1))
 		map[y][x - 1] = h;
-	if (map[y][x + 1] != MY_HEAT && map[y][x + 1] > h && (i = 1))
+	if ((x + 1) < step->m_size_x &&
+	map[y][x + 1] != MY_HEAT && map[y][x + 1] > h && (i = 1))
 		map[y][x + 1] = h;
-	if (map[y - 1][x - 1] != MY_HEAT && map[y - 1][x - 1] > h && (i = 1))
+	if ((y - 1) >= 0 && (x - 1) >= 0 &&
+	map[y - 1][x - 1] != MY_HEAT && map[y - 1][x - 1] > h && (i = 1))
 		map[y - 1][x - 1] = h;
-	if (map[y - 1][x] != MY_HEAT && map[y - 1][x] > h && (i = 1))
+	if ((y - 1) >= 0 &&
+	map[y - 1][x] != MY_HEAT && map[y - 1][x] > h && (i = 1))
 		map[y - 1][x] = h;
-	if (map[y - 1][x + 1] != MY_HEAT && map[y - 1][x + 1] > h && (i = 1))
+	if ((y - 1) >= 0 && (x + 1) < step->m_size_x &&
+	map[y - 1][x + 1] != MY_HEAT && map[y - 1][x + 1] > h && (i = 1))
 		map[y - 1][x + 1] = h;
 	return (i);
 }
@@ -64,7 +74,10 @@ static int		set_the_heat(t_flr *step, char heat)
 		while (x < step->m_size_x)
 		{
 			if (step->map[y][x] == prev)
-				marker = set_heat_aroud(step->map, y, x, heat);
+			{
+				if (set_heat_aroud(step, y, x, heat))
+					marker = 1;
+			}
 			x++;
 		}
 		y++;
@@ -77,9 +90,11 @@ void		fill_heat_map(t_flr *step)
 	char		heat;
 
 	set_default_heat(step);
-	heat = 1;
+	// print_map(step);
+
+	heat = 2;
 	while (heat < MY_HEAT && set_the_heat(step, heat))
-		;
-	print_map(step);
-	print_piece(step);
+		heat++;
+	// print_map(step);
+	// print_piece(step);
 }

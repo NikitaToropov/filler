@@ -30,6 +30,7 @@ printf("fill_map_size/ Plateau line\n");
 printf("fill_map_size/ digits line\n%s\n", line);
 		error(step, line);
 	}
+
 	free(line);
 }
 
@@ -63,16 +64,16 @@ void			fill_map(t_flr *step)
 	char		*line;
 	int			i;
 
-	i = 0;
-	line = NULL;
 	if (!step->map)
 		if (!(step->map = ft_memalloc(sizeof(char*) * step->m_size_y)))
 			error(step, NULL);
-	while (i < step->p_size_y && get_next_line(0, &line))
+	i = 0;
+	line = NULL;
+	while (i < step->m_size_y && get_next_line(0, &line))
 	{
 		check_map_line(step, line, i);
 		step->map[i] = line + X_CONST;
-		// printf("%s\n", line);
+		// printf("%s   %i\n", line, i);
 		i++;
 	}
 	if (i != step->m_size_y)
