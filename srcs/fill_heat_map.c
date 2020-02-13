@@ -1,19 +1,19 @@
 #include "filler.h"
 
-void		set_default_heat(t_map *map)
+static void		set_default_heat(t_flr *step)
 {
 	char	*line;
 	int		i;
 
 	i = 0;
-	while (i < map->m_size_y)
+	while (i < step->m_size_y)
 	{
-		line = map->map[i];
+		line = step->map[i];
 		while(*line)
 		{
-			if (*line = map->me)
+			if (*line == step->me)
 				*line = MY_HEAT;
-			else if (*line = map->me)
+			else if (*line == step->enemy)
 				*line = 0;
 			else
 				*line = DEFAULT;
@@ -23,7 +23,7 @@ void		set_default_heat(t_map *map)
 	}
 }
 
-int			check_and_set_aroud(char **map, int y, int x, char h)
+static int		set_heat_aroud(char **map, int y, int x, char h)
 {
 	int		i;
 
@@ -47,7 +47,8 @@ int			check_and_set_aroud(char **map, int y, int x, char h)
 	return (i);
 }
 
-int			set_the_heat(t_map *map, char h)
+// static int			set_the_heat(t_flr *step, char heat)
+int			set_the_heat(t_flr *step, char heat)
 {
 	int		y;
 	int		x;
@@ -56,13 +57,14 @@ int			set_the_heat(t_map *map, char h)
 
 	y = 0;
 	marker = 0;
-	prev = h - 1;
-	while (y < map->m_size_y)
+	prev = heat - 1;
+	while (y < step->m_size_y)
 	{
 		x = 0;
-		while (x < map->m_size_x)
-			if (map->map[y][x] == prev)
-				marker = check_and_set_aroud(map->map, y, x, h);
+		while (x < step->m_size_x)
+		{
+			if (step->map[y][x] == prev)
+				marker = set_heat_aroud(step->map, y, x, heat);
 			x++;
 		}
 		y++;
@@ -70,12 +72,12 @@ int			set_the_heat(t_map *map, char h)
 	return (marker);
 }
 
-void		init_heat_map(t_map *map)
+void		fill_heat_map(t_flr *step)
 {
-	char		i;
+	char		heat;
 
-	set_default_heat(map);
-	i = 1;
-	while (i < MY_HEAT && set_the_heat(map, i))
+	set_default_heat(step);
+	heat = 1;
+	while (heat < MY_HEAT && set_the_heat(step, heat))
 		;
 }

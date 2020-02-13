@@ -54,10 +54,13 @@ void		fill_map(t_flr *step);
 /*
 * PIECE MANIPULATIONS
 */
+void		fill_map_size(t_flr *step, char *line);
+void		fill_piece(t_flr *step);
+
 
 /*
 * PARSING
 */
-void		get_vm_return(t_map *map, t_piece *p);
+void		get_vm_return(t_flr *step);
 
 #endif

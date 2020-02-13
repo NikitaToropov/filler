@@ -1,6 +1,6 @@
 #include "filler.h"
 
-void		error(t_flr *step, char *line)
+void			error(t_flr *step, char *line)
 {
 	int		i;
 
@@ -14,17 +14,13 @@ void		error(t_flr *step, char *line)
 	exit(1);
 }
 
-void			get_player(t_flr *step)
+static void		get_player(t_flr *step)
 {
 	char		*line;
 
 	line = NULL;
-	if (get_next_line(0, &line) < 0)
-	{
-		if (line)
-			free(line);
-		error(step);
-	}
+	if (get_next_line(0, &line) <= 0)
+		error(step, line);
 	if (ft_strncmp(line, "$$$ exec p", 9) == 0 && step->me == 0)
 	{
 		if (ft_strstr(line, "p2"))
@@ -37,14 +33,10 @@ void			get_player(t_flr *step)
 			step->me = P2_CHAR;
 			step->enemy = P2_CHAR;
 		}
+		free(line);
 	}
 	else
-	{
-		if (line)
-			free(line);
-		error(step);
-	}
-	free(line);
+		error(step, line);
 }
 
 static void		init_t_flr(t_flr *step)
@@ -64,6 +56,19 @@ static void		init_t_flr(t_flr *step)
 	step->best_y = -1;
 }
 
+void			parse_input(t_flr *step)
+{
+	char		*line;
+
+	line = NULL;
+	while (get_next_line(0, &line))
+	{
+		fill_map_size(step, line);
+		fill_map(step);
+		fill_piece(step);
+	}
+}
+
 int				main(void)
 {
 	t_flr		step;
@@ -72,25 +77,20 @@ int				main(void)
 	get_player(&step);
 	while (1)
 	{
-		get_vm_return(&step);
+		parse_input(&step);
+		fill_heat_map(&step);
 
 
 
-		make_heat_map(map);
-		if (play(map, p) == 1)
-
-
-
-
-
-		{
-			if (last_try(map, p) == 1)
-			{
-				print_result(p, map);
-				exit(1);
-			}
-		}
+		// if (play(map, p) == 1)
+		// {
+		// 	if (last_try(map, p) == 1)
+		// 	{
+		// 		print_result(p, map);
+		// 		exit(1);
+		// 	}
+		// }
 	}
-	free(p.piece);
+	free_t_flr(&step);
 	return (0);
 }

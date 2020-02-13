@@ -62,7 +62,7 @@ void			fill_piece(t_flr *step)
 	line = NULL;
 	while (i < step->p_size_y && get_next_line(0, &line))
 	{
-		check_piece_line(step, lsine);
+		check_piece_line(step, line);
 		step->piece[i] = line;
 		i++;
 	}

@@ -1,18 +1,15 @@
 #include "filler.h"
 
 
-static void		fill_map_size(t_flr *step)
+void		fill_map_size(t_flr *step, char *line)
 {
-	char		*line;
 	char		*y_str;
 	char		*x_str;
 	int			y;
 	int			x;
 
-	line = NULL;
-	if (get_next_line(0, &line) <= 0 || ft_strncmp(line, "Plateau", 6) ||
-	!(y_str = ft_strchr(line, ' ')) || !(x_str = ft_strchr(y_str + 1, ' ')) ||
-	ft_strchr(x_str + 1, ' ') ||
+	if (ft_strncmp(line, "Plateau", 6) || !(y_str = ft_strchr(line, ' ')) ||
+	!(x_str = ft_strchr(y_str + 1, ' ')) || ft_strchr(x_str + 1, ' ') ||
 	(y = ft_atoi(y_str)) < 1 || (x = ft_atoi(x_str)) < 1 ||
 	(step->m_size_y > 0 && y != step->m_size_y) ||
 	(step->m_size_x > 0 && x != step->m_size_x))
@@ -65,7 +62,6 @@ void			fill_map(t_flr *step)
 	int			i;
 
 
-	fill_map_size(step);
 	i = 0;
 	line = NULL;
 	if (!step->map)
