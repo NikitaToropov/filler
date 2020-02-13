@@ -12,6 +12,10 @@ DIR_O = objs
 
 # files
 C_FILES = main.c\
+		t_flr.c\
+		fill_heat_map.c\
+		fill_map.c\
+		fill_piece.c\
 
 SRCS = $(addprefix $(DIR_S)/,$(C_FILES))
 OBJS = $(addprefix $(DIR_O)/,$(C_FILES:.c=.o))

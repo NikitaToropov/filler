@@ -48,7 +48,7 @@ static int		set_heat_aroud(char **map, int y, int x, char h)
 }
 
 // static int			set_the_heat(t_flr *step, char heat)
-int			set_the_heat(t_flr *step, char heat)
+static int		set_the_heat(t_flr *step, char heat)
 {
 	int		y;
 	int		x;
@@ -80,4 +80,6 @@ void		fill_heat_map(t_flr *step)
 	heat = 1;
 	while (heat < MY_HEAT && set_the_heat(step, heat))
 		;
+	print_map(step);
+	print_piece(step);
 }

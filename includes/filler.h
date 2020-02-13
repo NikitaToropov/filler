@@ -39,7 +39,7 @@ void		error(t_flr *step, char *line);
 /*
 * SET HEAT
 */
-// void		init_heat_map(t_map *map);
+void		fill_heat_map(t_flr *step);
 
 /*
 * T_FLR
@@ -49,13 +49,18 @@ void		free_t_flr(t_flr *step);
 /*
 * MAP MANIPULATIONS
 */
+void		free_lines_in_map(char **map, int size_y);
 void		fill_map(t_flr *step);
+void		print_map(t_flr *step);
 
 /*
 * PIECE MANIPULATIONS
 */
+void		free_piece(t_flr *step);
 void		fill_map_size(t_flr *step, char *line);
 void		fill_piece(t_flr *step);
+void		print_piece(t_flr *step);
+
 
 
 /*
