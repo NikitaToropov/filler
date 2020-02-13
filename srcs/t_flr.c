@@ -25,7 +25,6 @@ void		print_map(t_flr *step)
 void		print_piece(t_flr *step)
 {
 	int		y;
-	char	*line;
 
 	y = 0;
 	while (y < step->p_size_y)

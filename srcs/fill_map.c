@@ -8,6 +8,8 @@ void		fill_map_size(t_flr *step, char *line)
 	int			y;
 	int			x;
 
+	y = 0;
+	x = 0;
 	if (ft_strncmp(line, "Plateau", 6) || !(y_str = ft_strchr(line, ' ')) ||
 	!(x_str = ft_strchr(y_str + 1, ' ')) || ft_strchr(x_str + 1, ' ') ||
 	(y = ft_atoi(y_str)) < 1 || (x = ft_atoi(x_str)) < 1 ||
@@ -22,10 +24,10 @@ printf("fill_map_size/ Plateau line\n");
 	step->m_size_x = x;
 	free(line);
 
-	if (get_next_line(0, &line) <= 4 || ft_strncmp(line, "    ", 3) ||
+	if (!get_next_line(0, &line) || ft_strlen(line) <= 4 || ft_strncmp(line, "    ", 3) ||
 	!ft_all_isdigit(line + 4))
 	{
-printf("fill_map_size/ digits line\n");
+printf("fill_map_size/ digits line\n%s\n", line);
 		error(step, line);
 	}
 	free(line);
@@ -35,7 +37,7 @@ static void		check_map_line(t_flr *step, char *line, int y)
 {
 	int			i;
 
-	if (line && ft_strlen(line) == (step->m_size_x + X_CONST) &&
+	if (line && ft_strlen(line) == (size_t)(step->m_size_x + X_CONST) &&
 	ft_isdigit(line[0]) && ft_isdigit(line[1]) && ft_isdigit(line[2]) &&
 	line[3] == ' ' && ft_atoi(line) == y)
 	{
@@ -61,7 +63,6 @@ void			fill_map(t_flr *step)
 	char		*line;
 	int			i;
 
-
 	i = 0;
 	line = NULL;
 	if (!step->map)
@@ -71,10 +72,13 @@ void			fill_map(t_flr *step)
 	{
 		check_map_line(step, line, i);
 		step->map[i] = line + X_CONST;
+		// printf("%s\n", line);
 		i++;
 	}
 	if (i != step->m_size_y)
 	{
+		if (line)
+			printf("%s\n", line);
 printf("fill_map/ i != step->m_size_y\n");
 printf("fill_map/ %i != %i\n", i, step->m_size_y);
 		error(step, NULL);

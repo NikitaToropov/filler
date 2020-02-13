@@ -7,6 +7,8 @@ static void		fill_piece_size(t_flr *step)
 	int			y;
 	int			x;
 
+	y = 0;
+	x = 0;
 	line = NULL;
 	if (get_next_line(0, &line) <= 0 || ft_strncmp(line, "Piece", 4) ||
 	!(y_str = ft_strchr(line, ' ')) || !(x_str = ft_strchr(y_str + 1, ' ')) ||
@@ -36,7 +38,7 @@ static void		check_piece_line(t_flr *step, char *line)
 
 	i = 0;
 	
-	if (line && ft_strlen(line) == step->p_size_x)
+	if (line && ft_strlen(line) == (size_t)step->p_size_x)
 	{
 		while (line[i])
 		{
