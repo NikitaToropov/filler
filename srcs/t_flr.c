@@ -35,44 +35,6 @@ void		print_piece(t_flr *step)
 	}
 }
 
-
-// // void		fill_map(t_map *map, t_piece *p)
-// void		fill_map(t_flr *step)
-// {
-// 	char	*line;
-// 	int		i;
-
-// 	line = NULL;
-// 	if (!get_next_line(0, &line) || ft_strlen(line) <= X_CONST ||
-// 	ft_all_isdigit(line + X_CONST) || !ft_strncmp(line, "    ", 3))
-// 		ft_error(map, p, line);
-// 	free(line);
-// 	i = 0;
-// 	while (i < map->size_y && get_next_line(0, &line))
-// 	{
-// 		if (i != ft_atoi(line) || ft_strlen(line + X_CONST) != map->size_x)
-// 			ft_error(map, p, line);
-// 		map->map[i] = line + X_CONST;
-// 	}
-// }
-
-// void		fill_piece(t_map *map, t_piece *p)
-// {
-// 	char	*line;
-// 	int		i;
-
-// 	line = NULL;
-// 	i = 0;
-// 	while (i < p->size_y && get_next_line(0, &line))
-// 	{
-// 		if (ft_strlen(line) != p->size_x)
-// 			ft_error(map, p, line);
-// 		map->map[i] = line;
-// 	}
-// 	if (i != p->size_y)
-// 		ft_error(map, p, NULL);
-// }
-
 void		free_piece(t_flr *step)
 {
 	int		i;

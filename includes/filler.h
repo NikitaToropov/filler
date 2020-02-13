@@ -34,27 +34,26 @@ typedef struct		s_flr
 }					t_flr;
 
 
-void		error(t_flr *step);
-
+void		error(t_flr *step, char *line);
 
 /*
 * SET HEAT
 */
-void		init_heat_map(t_map *map);
+// void		init_heat_map(t_map *map);
+
+/*
+* T_FLR
+*/
+void		free_t_flr(t_flr *step);
 
 /*
 * MAP MANIPULATIONS
 */
-void		fill_map(t_map *map, t_piece *p);
-void		init_t_map(t_map *map);
-void		free_map(t_map *map);
-void		print_map(t_map *map);
+void		fill_map(t_flr *step);
+
 /*
 * PIECE MANIPULATIONS
 */
-void		fill_piece(t_map *map, t_piece *p);
-void		init_t_piece(t_piece *p);
-void		free_piece(t_piece *p);
 
 /*
 * PARSING

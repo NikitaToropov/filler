@@ -1,9 +1,14 @@
 #include "filler.h"
 
-void		error(t_flr *step)
+void		error(t_flr *step, char *line)
 {
 	int		i;
 
+	if (line)
+	{
+		free(line);
+		line = NULL;
+	}
 	free_t_flr(step);
 	write(1, "Error\n", 6);
 	exit(1);
@@ -65,12 +70,12 @@ int				main(void)
 
 	init_t_flr(&step);
 	get_player(&step);
-
-
-
 	while (1)
 	{
-		get_vm_return(&map, &p);
+		get_vm_return(&step);
+
+
+
 		make_heat_map(map);
 		if (play(map, p) == 1)
 
