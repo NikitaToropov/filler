@@ -9,12 +9,13 @@
 # define RED			"\033[1;31m"
 # define RESET			"\033[0m"
 
-# define INF		1000000000
-# define MY_HEAT	127
-# define DEFAULT	126
-# define P1_CHAR	'O'
-# define P2_CHAR	'X'
-# define X_CONST	4
+# define INF			1000000000
+# define MY_HEAT		127
+# define ENEMYS_HEAT	1
+# define DEFAULT		126
+# define P1_CHAR		'O'
+# define P2_CHAR		'X'
+# define X_CONST		4
 
 typedef struct		s_flr
 {
@@ -35,6 +36,11 @@ typedef struct		s_flr
 
 
 void		error(t_flr *step, char *line);
+
+/*
+* SOLVING
+*/
+void		find_best_heat_solution(t_flr *step);
 
 /*
 * SET HEAT

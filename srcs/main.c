@@ -96,7 +96,7 @@ int				main(void)
 	{
 		parse_input(&step);
 		fill_heat_map(&step);
-		// find_best_heat_solution();
+		// find_best_heat_solution(&step);
 	return (0);
 	}
 	free_t_flr(&step);
