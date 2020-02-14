@@ -1,5 +1,13 @@
 #include "filler.h"
 
+void		print_result(t_flr *step)
+{
+	ft_putnbr(step->best_y);
+	write(1, " ", 1);
+	ft_putnbr(step->best_x);
+	write(1, "\n", 1);
+}
+
 void		check_position(t_flr *step, int y_m, int x_m)
 {
 	int		summ;
@@ -24,18 +32,27 @@ void		check_position(t_flr *step, int y_m, int x_m)
 				else if (step->piece[y_p][x_p] == '*' &&
 				step->map[y_m + y_p][x_m + x_p] == MY_HEAT)
 					common++;
+				else
+					summ += (int)step->map[y_m + y_p][x_m + x_p];
 				x_p++;
 			}
 			y_p++;
 		}
+		if (common == 1 && summ < step->best_summ)
+		{
+			step->best_summ = summ;
+			step->best_x = x_m;
+			step->best_y = y_m;
+		}
 	}
 }
 
-void		find_best_heat_solution(t_flr *step)
+void			find_best_heat_solution(t_flr *step)
 {
 	int			y;
 	int			x;
 
+	y = 0;
 	while (y < step->m_size_y)
 	{
 		x = 0;

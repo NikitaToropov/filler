@@ -41,6 +41,7 @@ void		error(t_flr *step, char *line);
 * SOLVING
 */
 void		find_best_heat_solution(t_flr *step);
+void		print_result(t_flr *step);
 
 /*
 * SET HEAT

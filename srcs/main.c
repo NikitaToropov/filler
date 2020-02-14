@@ -7,6 +7,20 @@
 // #include <stdio.h>
 // #include "libft.h"
 
+static void		reset_t_flr(t_flr *step)
+{
+	free_piece(step);
+	free_lines_in_map(step->map, step->m_size_y);
+	step->piece = NULL;
+	step->p_size_x = 0;
+	step->p_size_y = 0;
+
+	step->best_x = -1;
+	step->best_y = -1;
+	step->best_summ = INF;
+}
+
+
 void			error(t_flr *step, char *line)
 {
 	if (line)
@@ -33,11 +47,13 @@ static void		get_player(t_flr *step)
 			step->me = P2_CHAR;
 			step->enemy = P1_CHAR;
 		}
-		if (ft_strstr(line, "p1"))
+		else if (ft_strstr(line, "p1"))
 		{
 			step->me = P1_CHAR;
 			step->enemy = P2_CHAR;
 		}
+		else
+			error(step, line);
 		free(line);
 	}
 	else
@@ -80,14 +96,7 @@ int				main(void)
 	// char		*line;
 	// int			l;
 
-	// fd = open("txt.txt", O_RDWR | O_APPEND);
-	// while (get_next_line(0, &line))
-	// {
-	// 	l = ft_strlen(line);
-	// 	write(fd, line, l);
-	// 	write(fd, "\n", 1);
-	// }
-	// close(fd);
+	
 	t_flr		step;
 
 	init_t_flr(&step);
@@ -96,8 +105,26 @@ int				main(void)
 	{
 		parse_input(&step);
 		fill_heat_map(&step);
-		// find_best_heat_solution(&step);
-	return (0);
+		find_best_heat_solution(&step);
+		if (step.best_x == -1 || step.best_x == -1)
+		{
+			free_t_flr(&step);
+			return (0);
+		}
+		print_result(&step);
+		reset_t_flr(&step);
+		
+	// 	fd = open("txt copy.txt", O_RDWR | O_APPEND);
+	// while (get_next_line(0, &line))
+	// {
+	// 	printf("kjhfksdhfjksd");
+	// 	l = ft_strlen(line);
+	// 	write(fd, line, l);
+	// 	write(fd, "\n", 1);
+	// }
+	// close(fd);
+
+		// free_t_flr(&step);
 	}
 	free_t_flr(&step);
 	return (0);

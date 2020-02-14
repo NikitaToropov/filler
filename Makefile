@@ -16,6 +16,7 @@ C_FILES = main.c\
 		fill_heat_map.c\
 		fill_map.c\
 		fill_piece.c\
+		find_solution.c\
 
 SRCS = $(addprefix $(DIR_S)/,$(C_FILES))
 OBJS = $(addprefix $(DIR_O)/,$(C_FILES:.c=.o))

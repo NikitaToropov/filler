@@ -62,7 +62,7 @@ void		free_lines_in_map(char **map, int size_y)
 		i = 0;
 		while (i < size_y)
 		{
-			if ((map[i] - X_CONST))
+			if (map[i])
 				free((map[i] - X_CONST));
 			map[i++] = NULL;
 		}
