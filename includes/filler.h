@@ -41,7 +41,7 @@ void		error(t_flr *step, char *line);
 * SOLVING
 */
 void		find_best_heat_solution(t_flr *step);
-void		print_result(t_flr *step);
+void		print_result(t_flr *step, int fd);
 
 /*
 * SET HEAT
@@ -64,7 +64,7 @@ void		print_map(t_flr *step);
 * PIECE MANIPULATIONS
 */
 void		free_piece(t_flr *step);
-void		fill_map_size(t_flr *step, char *line);
+void		fill_map_size(t_flr *stepы);
 void		fill_piece(t_flr *step);
 void		print_piece(t_flr *step);
 

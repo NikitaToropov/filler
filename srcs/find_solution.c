@@ -1,11 +1,17 @@
 #include "filler.h"
 
-void		print_result(t_flr *step)
+void		print_result(t_flr *step, int fd)
 {
+	ft_putnbr_fd(step->best_y, fd);
+	write(fd, " ", 1);
+	ft_putnbr_fd(step->best_x, fd);
+	write(fd, "\n", 1);
 	ft_putnbr(step->best_y);
 	write(1, " ", 1);
 	ft_putnbr(step->best_x);
 	write(1, "\n", 1);
+	
+	// printf("%i %i\n", step->best_y, step->best_x);
 }
 
 void		check_position(t_flr *step, int y_m, int x_m)
@@ -38,7 +44,7 @@ void		check_position(t_flr *step, int y_m, int x_m)
 			}
 			y_p++;
 		}
-		if (common == 1 && summ < step->best_summ)
+		if (common == 1 && summ <= step->best_summ)
 		{
 			step->best_summ = summ;
 			step->best_x = x_m;

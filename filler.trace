@@ -1,5 +1,5 @@
-seed = 224
-O: timedout
-./resources/players/abanlin.filler won
+seed = 2943
+O: error on input
+./cmissy.filler won
 Score:
-0AGAINST149
+130AGAINST43

@@ -29,7 +29,7 @@ void			error(t_flr *step, char *line)
 		line = NULL;
 	}
 	free_t_flr(step);
-	write(1, "Error\n", 6);
+	// write(1, "Error\n", 6);
 	exit(1);
 }
 
@@ -77,33 +77,34 @@ static void		init_t_flr(t_flr *step)
 	step->best_y = -1;
 }
 
-void			parse_input(t_flr *step)
-{
-	char		*line;
-
-	line = NULL;
-	while (get_next_line(0, &line))
-	{
-		fill_map_size(step, line);
-		fill_map(step);
-		fill_piece(step);
-	}
-}
-
 int				main(void)
 {
-	// int			fd;
-	// char		*line;
+	int			fd;
+	char		*line;
 	// int			l;
 
-	
+	fd = open("txt copy.txt", O_RDWR | O_APPEND);
+	// write(1, "8 2\n", 4);
+	// while (get_next_line(0, &line))
+	// {
+	// 	l = ft_strlen(line);
+	// 	write(fd, line, l);
+	// 	write(fd, "\n", 1);
+	// }
+
 	t_flr		step;
 
 	init_t_flr(&step);
 	get_player(&step);
+	line = NULL;
 	while (1)
 	{
-		parse_input(&step);
+		fill_map_size(&step);
+		fill_map(&step);
+		fill_piece(&step);
+
+
+
 		fill_heat_map(&step);
 		find_best_heat_solution(&step);
 		if (step.best_x == -1 || step.best_x == -1)
@@ -111,21 +112,11 @@ int				main(void)
 			free_t_flr(&step);
 			return (0);
 		}
-		print_result(&step);
+		print_result(&step, fd);
 		reset_t_flr(&step);
-		
-	// 	fd = open("txt copy.txt", O_RDWR | O_APPEND);
-	// while (get_next_line(0, &line))
-	// {
-	// 	printf("kjhfksdhfjksd");
-	// 	l = ft_strlen(line);
-	// 	write(fd, line, l);
-	// 	write(fd, "\n", 1);
-	// }
-	// close(fd);
-
-		// free_t_flr(&step);
+		write(fd, "shflksjdh\n", 9);
 	}
+	close(fd);
 	free_t_flr(&step);
 	return (0);
 }	
