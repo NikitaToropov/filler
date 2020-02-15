@@ -57,7 +57,6 @@ static int		set_heat_aroud(t_flr *step, int y, int x, char h)
 	return (i);
 }
 
-// static int			set_the_heat(t_flr *step, char heat)
 static int		set_the_heat(t_flr *step, char heat)
 {
 	int		y;
@@ -90,11 +89,7 @@ void		fill_heat_map(t_flr *step)
 	char		heat;
 
 	set_default_heat(step);
-	// print_map(step);
-
 	heat = 2;
 	while (heat < MY_HEAT && set_the_heat(step, heat))
 		heat++;
-	// print_map(step);
-	// print_piece(step);
 }

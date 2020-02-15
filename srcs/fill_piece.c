@@ -78,8 +78,6 @@ void			fill_piece(t_flr *step)
 
 	if (i != step->p_size_y)
 	{
-printf("fill_piece/ i != step->p_size_y\n");
-printf("fill_map/ %i != %i\n", i, step->p_size_y);
 		error(step, NULL);
 	}
 }

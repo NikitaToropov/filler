@@ -10,8 +10,6 @@ void		print_result(t_flr *step, int fd)
 	write(1, " ", 1);
 	ft_putnbr(step->best_x);
 	write(1, "\n", 1);
-	
-	// printf("%i %i\n", step->best_y, step->best_x);
 }
 
 void		check_position(t_flr *step, int y_m, int x_m)
