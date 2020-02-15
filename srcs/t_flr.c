@@ -1,39 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   t_flr.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cmissy <cmissy@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/15 19:32:49 by cmissy            #+#    #+#             */
+/*   Updated: 2020/02/15 19:58:23 by cmissy           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "filler.h"
-
-void		print_map(t_flr *step)
-{
-	int		y;
-	char	*line;
-
-	y = 0;
-	while (y < step->m_size_y)
-	{
-		line = step->map[y];
-		while (*line)
-		{
-			if (*line == MY_HEAT)
-				printf("%s%4i%s", RED, (int)*line, RESET);
-			else
-				printf("%4i", (int)*line);
-			line++;
-		}
-		printf("\n");
-		y++;
-	}
-	printf("\n");
-}
-
-void		print_piece(t_flr *step)
-{
-	int		y;
-
-	y = 0;
-	while (y < step->p_size_y)
-	{
-		printf("%s\n", step->piece[y]);
-		y++;
-	}
-}
 
 void		free_piece(t_flr *step)
 {
@@ -57,7 +34,7 @@ void		free_lines_in_map(char **map, int size_y)
 {
 	int		i;
 
-	if(map)
+	if (map)
 	{
 		i = 0;
 		while (i < size_y)

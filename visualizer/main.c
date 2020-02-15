@@ -1,4 +1,5 @@
-// #include "libft.h"
+#include "libft.h"
+#include <curses.h>
 #include <stdlib.h>
 #include <unistd.h>
 

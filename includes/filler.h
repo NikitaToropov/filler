@@ -3,7 +3,6 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h> // don't forget delite later
 # include "libft.h"
 
 # define RED			"\033[1;31m"
@@ -41,7 +40,7 @@ void		error(t_flr *step, char *line);
 * SOLVING
 */
 void		find_best_heat_solution(t_flr *step);
-void		print_result(t_flr *step, int fd);
+void		print_result(t_flr *step);
 
 /*
 * SET HEAT

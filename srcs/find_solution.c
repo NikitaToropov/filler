@@ -1,23 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   find_solution.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cmissy <cmissy@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/15 19:34:08 by cmissy            #+#    #+#             */
+/*   Updated: 2020/02/15 19:37:06 by cmissy           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "filler.h"
 
-void		print_result(t_flr *step, int fd)
+void				print_result(t_flr *step)
 {
-	ft_putnbr_fd(step->best_y, fd);
-	write(fd, " ", 1);
-	ft_putnbr_fd(step->best_x, fd);
-	write(fd, "\n", 1);
 	ft_putnbr(step->best_y);
 	write(1, " ", 1);
 	ft_putnbr(step->best_x);
 	write(1, "\n", 1);
 }
 
-void		check_position(t_flr *step, int y_m, int x_m)
+void				check_position(t_flr *step, int y_m, int x_m)
 {
-	int		summ;
-	int		y_p;
-	int		x_p;
-	int		common;
+	int				summ;
+	int				y_p;
+	int				x_p;
+	int				common;
 
 	summ = 0;
 	if ((y_m + step->p_size_y) <= step->m_size_y &&
@@ -51,10 +59,10 @@ void		check_position(t_flr *step, int y_m, int x_m)
 	}
 }
 
-void			find_best_heat_solution(t_flr *step)
+void				find_best_heat_solution(t_flr *step)
 {
-	int			y;
-	int			x;
+	int				y;
+	int				x;
 
 	y = 0;
 	while (y < step->m_size_y)

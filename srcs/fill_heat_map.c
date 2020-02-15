@@ -1,15 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fill_heat_map.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cmissy <cmissy@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/15 19:32:58 by cmissy            #+#    #+#             */
+/*   Updated: 2020/02/15 19:34:40 by cmissy           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "filler.h"
 
-static void		set_default_heat(t_flr *step)
+static void			set_default_heat(t_flr *step)
 {
-	char	*line;
-	int		i;
+	char			*line;
+	int				i;
 
 	i = 0;
 	while (i < step->m_size_y)
 	{
 		line = step->map[i];
-		while(*line)
+		while (*line)
 		{
 			if (*line == step->me)
 				*line = MY_HEAT;
@@ -23,10 +35,10 @@ static void		set_default_heat(t_flr *step)
 	}
 }
 
-static int		set_heat_aroud(t_flr *step, int y, int x, char h)
+static int			set_heat_aroud(t_flr *step, int y, int x, char h)
 {
-	int		i;
-	char	**map;
+	int				i;
+	char			**map;
 
 	i = 0;
 	map = step->map;
@@ -57,12 +69,12 @@ static int		set_heat_aroud(t_flr *step, int y, int x, char h)
 	return (i);
 }
 
-static int		set_the_heat(t_flr *step, char heat)
+static int			set_the_heat(t_flr *step, char heat)
 {
-	int		y;
-	int		x;
-	char	prev;
-	char	marker;
+	int				y;
+	int				x;
+	char			prev;
+	char			marker;
 
 	y = 0;
 	marker = 0;
@@ -84,9 +96,9 @@ static int		set_the_heat(t_flr *step, char heat)
 	return (marker);
 }
 
-void		fill_heat_map(t_flr *step)
+void				fill_heat_map(t_flr *step)
 {
-	char		heat;
+	char			heat;
 
 	set_default_heat(step);
 	heat = 2;
