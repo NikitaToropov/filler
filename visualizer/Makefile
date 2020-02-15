@@ -3,15 +3,8 @@ NAME = visual
 LIB_DIR = ../libft
 LIB = $(LIB_DIR)/libft.a
 
-INCLUDES = ./includes
-HEADER = $(INCLUDES)/filler.h
-
-# dirs
-DIR_S = srcs
-DIR_O = objs
-
 # files
-		
+C_FILES = main.c \
 
 SRCS = $(addprefix $(DIR_S)/,$(C_FILES))
 OBJS = $(addprefix $(DIR_O)/,$(C_FILES:.c=.o))
@@ -20,28 +13,23 @@ OBJS = $(addprefix $(DIR_O)/,$(C_FILES:.c=.o))
 CC = gcc
 FLAGS = -Wall -Werror -Wextra -g
 INC_LIBS = -L $(LIB_DIR) -lft
-INC_HEADERS = -I $(INCLUDES) -I $(LIB_DIR)
+INC_HEADERS = -I $(LIB_DIR)
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re force
 
 all: $(NAME)
 
-$(NAME): $(DIR_O) $(OBJS)
+$(NAME): $(LIB) $(C_FILES)
+	$(CC) $(FLAGS) $(C_FILES) $(INC_HEADERS) $(INC_LIBS) -o $@
+
+$(LIB): force
 	make -C $(LIB_DIR)
-	$(CC) $(FLAGS) $(OBJS) $(INC_HEADERS) $(INC_LIBS) -o $@
-
-$(DIR_O):
-	mkdir -p objs
-
-$(DIR_O)/%.o: $(DIR_S)/%.c $(HEADER)
-	$(CC) $(FLAGS) -I $(INCLUDES) -I $(LIB_DIR) -c ./$< -o $@
 
 clean:
-	rm -rf $(DIR_O)
-	make -C ./libft fclean
+	make fclean -C $(LIB_DIR)
 
 fclean: clean
-	rm -f $(NAME_PS)
-	rm -f $(NAME_CH)
+	rm -f $(NAME)
+	rm -f $(LIB)
 
 re: fclean all
