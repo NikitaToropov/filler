@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: cmissy <cmissy@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/02/16 17:37:30 by cmissy            #+#    #+#              #
+#    Updated: 2020/02/16 17:37:30 by cmissy           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = cmissy.filler
 
 LIB_DIR = ./libft
@@ -26,7 +38,7 @@ OBJS = $(addprefix $(DIR_O)/,$(C_FILES:.c=.o))
 
 # flags
 CC = gcc
-FLAGS = -Wall -Werror -Wextra -g
+FLAGS = -Wall -Werror -Wextra
 INC_LIBS = -L $(LIB_DIR) -lft
 INC_HEADERS = -I $(INCLUDES) -I $(LIB_DIR)
 
