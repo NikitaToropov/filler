@@ -7,11 +7,10 @@ LIB = $(LIB_DIR)/libft.a
 C_FILES = main.c \
 
 SRCS = $(addprefix $(DIR_S)/,$(C_FILES))
-OBJS = $(addprefix $(DIR_O)/,$(C_FILES:.c=.o))
 
 # flags
 CC = gcc
-FLAGS = -Wall -Werror -Wextra -g
+FLAGS = -Wall -Werror -Wextra
 INC_LIBS = -L $(LIB_DIR) -lft
 INC_HEADERS = -I $(LIB_DIR)
 
