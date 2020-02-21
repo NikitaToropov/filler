@@ -6,7 +6,7 @@
 /*   By: cmissy <cmissy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 19:35:05 by cmissy            #+#    #+#             */
-/*   Updated: 2020/02/15 19:57:53 by cmissy           ###   ########.fr       */
+/*   Updated: 2020/02/21 10:49:19 by cmissy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void				check_num_line(t_flr *step)
 
 	line = NULL;
 	if (!get_next_line(0, &line) || ft_strlen(line) <= 4 ||
-	ft_strncmp(line, "    ", 3) || !ft_all_isdigit(line + 4))
+	ft_strncmp(line, "    ", 3) || !ft_allisdigit(line + 4))
 		error(step, line);
 	free(line);
 }
